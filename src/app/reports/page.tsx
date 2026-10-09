@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Bar, BarChart, Pie, PieChart, ResponsiveContainer, XAxis, YAxis, Tooltip, Legend, Cell } from 'recharts';
 import { initialExpenses } from '@/lib/data';
+import { useStore } from '@/lib/store';
 import type { Expense } from '@/lib/types';
 import { expenseCategories } from '@/lib/types';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -11,7 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 const COLORS = ['#3F51B5', '#009688', '#FFC107', '#F44336', '#9C27B0', '#03A9F4', '#4CAF50', '#FF9800'];
 
 export default function ReportsPage() {
-  const [expenses] = useState<Expense[]>(initialExpenses);
+    const { expenses } = useStore();
 
   const expenseDataByCategory = expenseCategories.map(category => {
     const total = expenses

@@ -10,6 +10,7 @@ import {
   LayoutDashboard,
   LogOut,
   ShoppingBag,
+  Sparkles,
   TrendingUp,
 } from 'lucide-react';
 import {
@@ -62,6 +63,11 @@ const navItems = [
     href: '/reports',
     icon: TrendingUp,
     label: 'Reports',
+  },
+  {
+    href: '/assistant',
+    icon: Sparkles,
+    label: 'Assistant',
   },
 ];
 

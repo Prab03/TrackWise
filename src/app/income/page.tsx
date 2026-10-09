@@ -48,6 +48,7 @@ import {
 import { useToast } from '@/hooks/use-toast';
 import { initialIncomes } from '@/lib/data';
 import type { Income } from '@/lib/types';
+import { useStore } from '@/lib/store';
 import { format } from 'date-fns';
 
 const incomeSchema = z.object({
@@ -57,7 +58,7 @@ const incomeSchema = z.object({
 });
 
 export default function IncomePage() {
-  const [incomes, setIncomes] = useState<Income[]>(initialIncomes);
+    const { incomes, setIncomes } = useStore();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingIncome, setEditingIncome] = useState<Income | null>(null);
   const { toast } = useToast();

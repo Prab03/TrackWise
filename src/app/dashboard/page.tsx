@@ -6,6 +6,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { initialExpenses, initialIncomes, initialBudgets } from '@/lib/data';
+import { useStore } from '@/lib/store';
 import type { Expense, Income, Budget } from '@/lib/types';
 import { format } from 'date-fns';
 import { ArrowUpRight, ArrowDownLeft, Wallet, TrendingUp } from 'lucide-react';
@@ -24,14 +25,10 @@ const StatCard = ({ title, value, icon: Icon, description }: { title: string; va
 );
 
 export default function DashboardPage() {
-  const [expenses, setExpenses] = useState<Expense[]>(initialExpenses);
-  const [incomes, setIncomes] = useState<Income[]>(initialIncomes);
-  const [budgets, setBudgets] = useState<Budget[]>(initialBudgets);
-
+  const { expenses, setExpenses, incomes, setIncomes, budgets, setBudgets } = useStore();
   const totalIncome = incomes.reduce((acc, income) => acc + income.amount, 0);
   const totalExpenses = expenses.reduce((acc, expense) => acc + expense.amount, 0);
   const balance = totalIncome - totalExpenses;
-
   const transactions = [...incomes, ...expenses]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 5);

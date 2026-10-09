@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import './globals.css';
 import { AppShell } from '@/components/app-shell';
 import { Toaster } from '@/components/ui/toaster';
+import { StoreProvider } from '@/lib/store';
 
 export default function RootLayout({
   children,
@@ -26,14 +27,14 @@ export default function RootLayout({
         <meta name="description" content="A modern budget and expense tracking application." />
       </head>
       <body className="font-body antialiased">
-        {isAuthPage ? (
-          <>
-            {children}
-          </>
-        ) : (
-          <AppShell>{children}</AppShell>
-        )}
-        <Toaster />
+        <StoreProvider>
+          {isAuthPage ? (
+            <>{children}</>
+          ) : (
+            <AppShell>{children}</AppShell>
+          )}
+          <Toaster />
+        </StoreProvider>
       </body>
     </html>
   );

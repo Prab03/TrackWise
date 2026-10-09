@@ -41,6 +41,7 @@ import {
 import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/hooks/use-toast';
 import { initialExpenses, initialBudgets } from '@/lib/data';
+import { useStore } from '@/lib/store';
 import type { Budget, Expense } from '@/lib/types';
 import { expenseCategories, ExpenseCategory } from '@/lib/types';
 import { cn } from '@/lib/utils';
@@ -52,8 +53,7 @@ const budgetSchema = z.object({
 });
 
 export default function BudgetsPage() {
-  const [budgets, setBudgets] = useState<Budget[]>(initialBudgets);
-  const [expenses] = useState<Expense[]>(initialExpenses);
+  const { budgets, setBudgets, expenses } = useStore();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { toast } = useToast();
 
